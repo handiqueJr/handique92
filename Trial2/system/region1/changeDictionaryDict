@@ -1,0 +1,273 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+boundary
+{
+    Left 
+    {
+        type        patch;
+    }
+    Right
+    {
+        type        patch;
+    }
+    Bottom
+    {
+        type        patch;
+    }
+    Top
+    {
+        type        patch;
+    }
+    defaultFaces
+    {
+        type        empty;
+    }    
+
+}
+U
+{
+    internalField   uniform (0 0 0);
+
+    boundaryField
+    {
+        Left
+        {
+            type            inletOutlet;
+            inletValue      uniform (0 0 0);
+        }
+
+        Right
+        {
+            type            inletOutlet;
+            inletValue      uniform (0 0 0);
+        }
+        Bottom
+        {
+            type            inletOutlet;
+            inletValue      uniform (0 0 0);
+        }
+
+        Top
+        {
+            type            inletOutlet;
+            inletValue      uniform (0 0 0);
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+
+        ".*"
+        {
+            type            fixedValue;
+            value           uniform (0 0 0);
+        }
+	
+
+    }
+}
+
+T
+{
+    internalField   uniform 294;
+
+    boundaryField
+    {
+        Left
+        {
+            type            inletOutlet;
+            inletValue      uniform 294;
+        }
+
+        Right
+        {
+            type            inletOutlet;
+            inletValue      uniform 294;
+        }
+        Bottom
+        {
+            type            inletOutlet;
+            inletValue      uniform 294;
+        }
+
+        Top
+        {
+            type            inletOutlet;
+            inletValue      uniform 294;
+        }
+
+        ".*"
+        {
+            type            zeroGradient;
+            value           uniform 294;
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+
+        fluid_to_region1
+        {
+            type            compressible::turbulentTemperatureCoupledBaffleMixed;
+            Tnbr            T;
+            kappaMethod     fluidThermo;
+            value           uniform 294;
+        }
+    }
+}
+
+epsilon
+{
+    internalField   uniform 0.01;
+
+    boundaryField
+    {
+        Left
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.01;
+        }
+
+        Right
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.01;
+        }
+        Bottom
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.01;
+        }
+
+        Top
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.01;
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+
+        ".*"
+        {
+            type            epsilonWallFunction;
+            value           uniform 0.01;
+        }
+    }
+}
+
+k
+{
+    internalField   uniform 0.1;
+
+    boundaryField
+    {
+        Left
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.1;
+        }
+
+        Right
+        {
+            type            zeroGradient;
+            value           uniform 0.1;
+        }
+        Bottom
+        {
+            type            inletOutlet;
+            inletValue      uniform 0.1;
+        }
+
+        Top
+        {
+            type            zeroGradient;
+            value           uniform 0.1;
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+
+        ".*"
+        {
+            type            kqRWallFunction;
+            value           uniform 0.1;
+        }
+    }
+}
+
+p_rgh
+{
+    internalField   uniform 1e5;
+
+    boundaryField
+    {
+        Left
+        {
+            type            fixedValue;
+            value           uniform 1e5;
+        }
+
+        Top
+        {
+            type            fixedValue;
+            value           uniform 1e5;
+        }
+        Right
+        {
+            type            fixedValue;
+            value           uniform 1e5;
+        }
+
+        Bottom
+        {
+            type            fixedValue;
+            value           uniform 1e5;
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+
+        ".*"
+        {
+            type            fixedFluxPressure;
+            value           uniform 1e5;
+        }
+    }
+}
+
+p
+{
+    internalField   uniform 1e5;
+
+    boundaryField
+    {
+        ".*"
+        {
+            type            calculated;
+            value           uniform 1e5;
+        }
+    defaultFaces
+    {
+        type        empty;
+    }
+    }
+}
+
+// ************************************************************************* //
