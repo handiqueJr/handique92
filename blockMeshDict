@@ -1,0 +1,127 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.001;
+
+vertices
+(
+(0 0 0)			// Vertex 0
+(70 0 0)	        // Vertex 1
+(214 0 0)	        // Vertex 2
+(284 0 0)	        // Vertex 3
+(284 184 0)             // Vertex 4
+(142 184 0)             // Vertex 5
+(0 184 0)	        // Vertex 6
+(142 72 0)              // Vertex 7
+(91.0883 50.9116 0)     // Vertex 8
+(192.9116 50.9116 0)    // Vertex 9
+(0 0 1)			// Vertex 10
+(70 0 1)	        // Vertex 11
+(214 0 1)	        // Vertex 12
+(284 0 1)	        // Vertex 13
+(284 184 1)             // Vertex 14
+(142 184 1)             // Vertex 15
+(0 184 1)	        // Vertex 16
+(142 72 1)              // Vertex 17
+(91.0883 50.9116 1)     // Vertex 18
+(192.9116 50.9116 1)    // Vertex 19
+
+(0 50.9116 0)	        // Vertex 20
+(91.0883 184 0)         // Vertex 21
+(192.9116 184 0)        // Vertex 22
+(284 50.9116 0)         // Vertex 23
+(0 50.9116 1)	        // Vertex 24
+(91.0883 184 1)         // Vertex 25
+(192.9116 184 1)        // Vertex 26
+(284 50.9116 1)         // Vertex 27
+);
+
+blocks
+(
+hex (0 1 8 20 10 11 18 24)      (20 10 1)  simpleGrading  (1 1 1)
+hex (20 8 21 6 24 18 25 16)      (20 20 1)  simpleGrading  (1 1 1)
+hex (21 8 7 5 25 18 17 15)      (20 20 1)  simpleGrading  (1 1 1)
+hex (7 9 22 5 17 19 26 15)      (20 20 1)  simpleGrading  (1 1 1)
+hex (9 23 4 22 19 27 14 26)      (20 20 1)  simpleGrading  (1 1 1)
+hex (23 9 2 3 27 19 12 13)      (20 10 1)  simpleGrading  (1 1 1)
+); 
+
+edges
+(
+	arc 1 8   (75.481 27.55 0)
+	arc 11 18   (75.481 27.55 1)
+	arc 8 7   (114.45 66.519 0)
+	arc 18 17   (114.45 66.519 1)
+
+	arc 7 9   (169.553 66.519 0)
+	arc 17 19   (169.553 66.519 1)
+	arc 9 2   (208 27.556 0)
+	arc 19 12   (208 27.556 1)
+);
+
+boundary
+(
+	Top
+	{
+		type patch;
+		faces
+		(
+			(6 21 25 16)
+			(21 5 15 25)
+			(15 5 22 26)
+			(22 4 14 26)
+		);
+	}
+
+	Bottom
+	{
+		type patch;
+		faces
+		(
+			(1 11 10 0)
+			(2 3 13 12)
+		);
+	}
+
+	Left
+	{
+		type patch;
+		faces
+		(
+			(0 20 24 10)
+			(20 6 16 24)
+		
+		);
+	}
+
+	Right
+	{
+		type patch;
+		faces
+		(
+			(3 23 27 13)
+			(23 4 14 27)
+		
+		);
+	}
+
+);
+
+mergePatchPairs
+(
+);
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
