@@ -1,0 +1,91 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+boundary
+{
+    defaultFaces 
+    {
+        type        empty;
+    }
+
+}
+
+T
+{
+    internalField   uniform 294;
+
+    boundaryField
+    {
+        defaultFaces
+        {
+            type            empty;
+        }
+
+        ".*"
+        {
+            type            zeroGradient;
+            value           uniform 294;
+        }
+
+
+        heatSource_to_region1
+        {
+            type            compressible::turbulentTemperatureCoupledBaffleMixed;
+            Tnbr            T;
+            kappaMethod     solidThermo;
+            value           uniform 294;
+        }
+    }
+}
+
+p_rgh
+{
+    internalField   uniform 1e5;
+
+    boundaryField
+    {
+        defaultFaces
+        {
+            type            empty;
+        }
+
+        ".*"
+        {
+            type            fixedFluxPressure;
+            value           uniform 1e5;
+        }
+    }
+}
+
+p
+{
+    internalField   uniform 1e5;
+
+    boundaryField
+    {
+        ".*"
+        {
+            type            calculated;
+            value           uniform 1e5;
+        }
+
+        defaultFaces
+        {
+            type            empty;
+        }
+    }
+}
+
+// ************************************************************************* //
